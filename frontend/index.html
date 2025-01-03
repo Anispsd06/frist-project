@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="page.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="logo">
+        <img class="imggg" src="./geam_n-removebg-preview.png" alt="">
+        <span>TO DO LISTS</span>
+      </div>
+      <div class="links">
+        <div><a href="index.html">Home</a></div>
+        <div><a href="about.html">About</a></div>
+        <div><a href="contact.html">Contact</a></div>  
+      </div>
+    </nav>
+    <div id="myDIV" class="header">
+     
+      
+        <h2 style="margin: 5px">My To Do List</h2>
+        <input type="text" id="myInput" placeholder="Title..." />
+        <span onclick="newElement()" class="addBtn">Add</span>
+      
+    </div>
+
+    <ul id="myUL">
+      
+    </ul>
+
+    <script src="page.js"></script>
+    <script>
+       let tbody = document.querySelector('#myUL');
+       console.log(tbody);
+       
+      fetch('http://localhost:8000/api/todo/todo')
+      .then((response) => {
+      return response.json()
+      })
+      .then((responseData) => {
+        let response = responseData.data[0];
+        response.forEach(item => {
+          let row = document.createElement('li');
+          row.textContent = item.title;
+          tbody.appendChild(row);
+        })
+     
+      console.log('responseData', responseData)
+      })
+  </script>
+  </body>
+</html>
